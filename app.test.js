@@ -1,25 +1,25 @@
 import translateOrder from "./app";
 
-test('returns T:1:0 when 1 tea with 1 sugar and a stick', () => {
-  const input = {
-    drink: 'tea',
-    sugar: 1,
-    stick: true,
-    money: 4,
+function generateOrder(drink, sugar, stick, money) {
+  const order = {
+    drink: drink,
+    sugar: sugar,
+    stick: stick,
+    money: money,
   }
-  
+  return order
+}
+
+test('returns T:1:0 when 1 tea with 1 sugar and a stick', () => {
+  const input = generateOrder('tea', 1, true, 4)
+
   const output = 'T:1:0'
   
   expect(translateOrder(input)).toBe(output);
 });
 
 test('returns H:: when 1 chocolate with no sugar and no stick', () => {
-  const input = {
-    drink: 'chocolate',
-    sugar: 0,
-    stick: false,
-    money: 5,
-  }
+  const input = generateOrder('chocolate', 0, false, 5)
   
   const output = 'H::'
   
@@ -27,12 +27,7 @@ test('returns H:: when 1 chocolate with no sugar and no stick', () => {
 })
 
 test('returns C:2:0 when 1 coffee with 2 sugar and a stick', () => {
-  const input = {
-    drink: 'coffee',
-    sugar: 2,
-    stick: true,
-    money: 6,
-  }
+  const input = generateOrder('coffee', 2, true, 6)
   
   const output = 'C:2:0'
   
@@ -40,14 +35,17 @@ test('returns C:2:0 when 1 coffee with 2 sugar and a stick', () => {
 })
 
 test('returns error msg if the amount of money is not enough', () => {
-  const input = {
-    drink: 'coffee',
-    sugar: 2,
-    stick: true,
-    money: 4,
-  }
+  const input = generateOrder('coffee', 2, true, 4)
 
   const output = '2 euros missing'
+
+  expect(translateOrder(input)).toBe(output)
+})
+
+test ('returns the serialized order output if the money is correct', () => {
+  const input = generateOrder('tea', 0, false, 5)
+
+  const output = 'T::'
 
   expect(translateOrder(input)).toBe(output)
 })
