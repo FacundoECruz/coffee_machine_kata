@@ -23,3 +23,15 @@ test('returns H:: when 1 chocolate with no sugar and no stick', () => {
 
   expect(translateOrder(input)).toBe(output);
 })
+
+test('returns C:2:0 when 1 coffee with 2 sugar and a stick', () => {
+  const input = {
+    drink: 'coffee',
+    sugar: 2,
+    stick: true,
+  }
+
+  const output = 'C:2:0'
+
+  expect(translateOrder(input)).toBe(output);
+})
