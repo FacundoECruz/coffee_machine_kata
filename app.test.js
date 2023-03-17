@@ -49,3 +49,11 @@ test ('returns the serialized order output if the money is correct', () => {
 
   expect(translateOrder(input)).toBe(output)
 })
+
+test('returns one orange juice', () => {
+  const input = generateOrder('juice', null, null, 6)
+
+  const output = 'O::'
+
+  expect(translateOrder(input)).toBe(output)
+})
