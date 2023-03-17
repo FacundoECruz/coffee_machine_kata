@@ -1,4 +1,4 @@
-function translateOrder({ drink, sugar, stick, money }) {
+function translateOrder({ drink, money, sugar = 0, stick = false}) {
   function calculateMoney(drink, money) {
     switch (drink) {
       case "tea": {
@@ -36,30 +36,19 @@ function translateOrder({ drink, sugar, stick, money }) {
       ? "O"
       : null;
 
-  function generateOutput(checkDrink, drink, money, sugar, stick) {
-    console.log(checkDrink, drink, money, sugar, stick)
-    if (drink === "juice") {
-      const checkMoney = calculateMoney(drink, money);
-      if(typeof checkMoney === "string"){
-        return checkMoney
-      } else {
-        return `${checkDrink}::`
-      }
-    } else {
-      const checkSugar = sugar === 0 ? "" : sugar.toString();
-      const checkStick = stick ? "0" : "";
-      const checkMoney = calculateMoney(drink, money);
-      if(typeof checkMoney === "string"){
-        return checkMoney
-      } else {
-        return `${checkDrink}:${checkSugar}:${checkStick}`
-      }
-    }
-  }
+  const checkSugar = sugar === 0 ? '' : sugar.toString()
+  const checkStick = stick ? '0' : ''
+  const checkMoney = calculateMoney(drink, money)
 
-  const output = generateOutput(checkDrink)
-  console.log(output);
-  return generateOutput
+  // if(typeof checkMoney === 'string'){
+  //   return checkMoney
+  // }else {
+  //   return
+  // }
+
+  const output = `${checkDrink}:${checkSugar}:${checkStick}`
+  
+  return typeof checkMoney === 'string' ? checkMoney : output
 }
 
 export default translateOrder;
