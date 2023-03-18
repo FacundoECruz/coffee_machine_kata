@@ -5,50 +5,31 @@ function translateOrder({
   stick = false,
   extraHot = false,
 }) {
-  function calculateMoney(drink, money) {
-    let price;
-    switch (drink) {
-      case "tea":
-        price = 4;
-        break;
-      case "chocolate":
-        price = 5;
-        break;
-      case "coffee":
-      case "juice":
-        price = 6;
-        break;
-      default:
-        return "No drink received";
-    }
+
+  const drinkCodes = {
+    tea: "T",
+    chocolate: "H",
+    coffee: "C",
+    juice: "O",
+  };
   
-    if (money >= price) {
-      return "";
-    }
+  const checkDrink = drinkCodes[drink] || null;
   
-    return `${price - money} euros missing`;
-  }  
+  const price = {
+    tea: 4,
+    chocolate: 5,
+    coffee: 6,
+    juice: 6,
+  }[drink];
+  
+  const missingMoney = price ? Math.max(price - money, 0) : null;
+  
+  const output = `${checkDrink}${extraHot ? "h" : ""}:${sugar || ""}:${stick ? "0" : ""}${
+    missingMoney ? `${missingMoney} euros missing` : ""
+  }`;
+  
+  return output || "No drink received";
 
-  const checkDrink =
-    drink === "tea"
-      ? "T"
-      : drink === "chocolate"
-      ? "H"
-      : drink === "coffee"
-      ? "C"
-      : drink === "juice"
-      ? "O"
-      : null;
-
-  const checkSugar = sugar === 0 ? "" : sugar.toString();
-  const checkStick = stick ? "0" : "";
-  const checkMoney = calculateMoney(drink, money);
-
-  const output = `${checkDrink}${extraHot ? "h" : ""}:${checkSugar}:${checkStick}`;
-  console.log(checkMoney)
-
-  return checkMoney !== "" ? checkMoney : output;
 }
-
 
 export default translateOrder;
