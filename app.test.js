@@ -1,5 +1,5 @@
 import translateOrder from "./app";
-import makeReport from "./app"
+import makeReport from "./makeReport"
 
 function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
