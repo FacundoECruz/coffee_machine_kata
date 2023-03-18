@@ -44,7 +44,7 @@ function translateOrder({
   const checkStick = stick ? "0" : "";
   const checkMoney = calculateMoney(drink, money);
 
-  const output = `${checkDrink}:${checkSugar}:${checkStick}`;
+  const output = `${checkDrink}${extraHot ? "h" : ""}:${checkSugar}:${checkStick}`;
   console.log(checkMoney)
 
   return checkMoney !== "" ? checkMoney : output;

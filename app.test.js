@@ -58,3 +58,20 @@ test('returns O:: when 1 orange juice', () => {
 
   expect(translateOrder(input)).toBe(output)
 })
+
+test('returns Ch:: when extra hot coffee with no sugar', () => {
+  const input = generateOrder('coffee', 6, 0, false, true)
+
+  const output = 'Ch::'
+
+  expect(translateOrder(input)).toBe(output)
+})
+
+test('Hh:1:0 when extra hot chocolate with one sugar and a stick)', () => {
+  const input = generateOrder('chocolate', 6, 1, true, true)
+
+  const output = 'Hh:1:0'
+
+  expect(translateOrder(input)).toBe(output)
+})
+
