@@ -1,11 +1,12 @@
 import translateOrder from "./app";
 
-function generateOrder(drink, money, sugar, stick) {
+function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
     drink: drink,
     money: money,
     sugar: sugar,
     stick: stick,
+    extraHot: extraHot,
   }
   return order
 }
