@@ -16,7 +16,10 @@ function translateOrder({
 
   const checkDrink = drinkCodes[drink] || null;  
   const available = checkAvailability(drink)
-  console.log(available)
+
+  if(available) { 
+    return available
+  }
 
   const price = {
     tea: 4,

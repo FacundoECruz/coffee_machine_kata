@@ -38,7 +38,7 @@ test("returns C:2:0 when 1 coffee with 2 sugar and a stick", () => {
 });
 
 test("returns error msg if the amount of money is not enough", () => {
-  const input = generateOrder("coffee", 4, 2, true);
+  const input = generateOrder("chocolate", 3, 2, true);
 
   const output = "2 euros missing";
 
