@@ -1,5 +1,6 @@
 import translateOrder from "./app";
 import makeReport from "./makeReport"
+import checkAvailability from "./checkAvailability";
 
 function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
@@ -78,10 +79,15 @@ test("Hh:1:0 when extra hot chocolate with one sugar and a stick)", () => {
 
 test("returns a report how many of each drink was sold and the total amount of money earned", () => {
   const result = makeReport();
-  console.log(result)
   expect(result).toHaveProperty('coffee');
   expect(result).toHaveProperty('juice');
   expect(result).toHaveProperty('chocolate');
   expect(result).toHaveProperty('tea');
   expect(result).toHaveProperty('earnedMoney');
 });
+
+test("sends and email to the company notifying missing drink", () => {
+  const mail = checkAvailability('coffee')
+  expect(mail).toHaveProperty('to')
+  expect(mail).toHaveProperty('msg')
+})
