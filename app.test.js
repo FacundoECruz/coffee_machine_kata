@@ -87,7 +87,8 @@ test("returns a report how many of each drink was sold and the total amount of m
 });
 
 test("sends and email to the company notifying missing drink", () => {
-  const mail = checkAvailability('coffee')
+  const drink = 'coffee'
+  const mail = checkAvailability(drink)
   expect(mail).toHaveProperty('to')
-  expect(mail).toHaveProperty('msg')
+  expect(mail).toHaveProperty('msg', `${drink} empty`)
 })
