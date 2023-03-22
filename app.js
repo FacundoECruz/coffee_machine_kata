@@ -17,7 +17,7 @@ function translateOrder({
   const checkDrink = drinkCodes[drink] || null;  
   const available = checkAvailability(drink)
 
-  if(available) { 
+  if(available !== '') { 
     return available
   }
 

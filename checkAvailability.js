@@ -1,29 +1,16 @@
-function beberageQuatityChecker(drink) {
-  const fakeDrinkDb = {
-    tea: 3,
-    coffee: 0,
-    juice: 3,
-    chocolate: 2,
-  }[drink];
-  const isEmpty = fakeDrinkDb !== 0 ? false : true
-  return isEmpty
-}
-
-function emailNotifier(drink) {
-  const mail = {
-    to: 'coffeeCompany@gmail.com',
-    msg: `${drink} empty`
-  }
-  return mail
-}
+import { beverageQuantityChecker } from "./beverageQuantityChecker";
+import emailNotifier from "./emailNotifier";
 
 function checkAvailability(drink) {
-  const isEmpty = beberageQuatityChecker(drink);
+  const isEmpty = beverageQuantityChecker(drink)
+  console.log(isEmpty)
   if (isEmpty) {
-    const mail = emailNotifier(drink);
-    return mail;
+    emailNotifier(drink);
+    const notifEmptyDrink = `${drink} shortage, notification sent to the company`;
+    return notifEmptyDrink;
+  } else {
+    return "";
   }
-  return ''
 }
 
 export default checkAvailability;
