@@ -92,7 +92,7 @@ test("returns a report how many of each drink was sold and the total amount of m
 
 test("indicates me the shortage (if any) and that a notification has been sent", () => {
   const drink = 'coffee'
-  beverageQuantityChecker.mockReturnValueOnce(`${drink} shortage, notification sent to the company`)
+  // beverageQuantityChecker.mockReturnValueOnce(`${drink} shortage, notification sent to the company`)
   const notifEmptyDrink = checkAvailability(drink)
   expect(notifEmptyDrink).toBe(`${drink} shortage, notification sent to the company`)
 })

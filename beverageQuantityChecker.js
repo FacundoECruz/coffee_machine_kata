@@ -1,11 +1,8 @@
+import { fakeDrinkDb } from "./fakeDrinkDb";
+
 export function beverageQuantityChecker(drink) {
-  const fakeDrinkDb = {
-    tea: 3,
-    coffee: 0,
-    juice: 3,
-    chocolate: 2,
-  }[drink];
-  console.log(fakeDrinkDb)
-  const isEmpty = fakeDrinkDb === 0;
+  const currentDrink = fakeDrinkDb[drink];
+  const isEmpty = currentDrink === 0;
   return isEmpty
 }
+
