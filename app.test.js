@@ -1,6 +1,10 @@
 import translateOrder from "./app";
 import makeReport from "./makeReport"
 import checkAvailability from "./checkAvailability";
+import { beverageQuantityChecker } from "./beverageQuantityChecker";
+import emailNotifier from "./emailNotifier";
+
+jest.mock('./beverageQuantityChecker')
 
 function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
@@ -88,6 +92,7 @@ test("returns a report how many of each drink was sold and the total amount of m
 
 test("indicates me the shortage (if any) and that a notification has been sent", () => {
   const drink = 'coffee'
+  beverageQuantityChecker.mockReturnValueOnce(`${drink} shortage, notification sent to the company`)
   const notifEmptyDrink = checkAvailability(drink)
   expect(notifEmptyDrink).toBe(`${drink} shortage, notification sent to the company`)
 })
