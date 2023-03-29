@@ -15,29 +15,34 @@ function translateOrder({
   };
 
   const checkDrink = drinkCodes[drink] || null;  
-  const available = checkAvailability(drink)
+  //*******CHANGE*********** */
+  const {is_not_available, availability_msg} = checkAvailability(drink)
 
-  if(available !== '') { 
+  if(is_not_available) { 
     return available
   }
 
-  const price = {
+  const prices = {
     tea: 4,
     chocolate: 5,
     coffee: 6,
     juice: 6,
-  }[drink];
+  };
 
-  const missingMoney = price ? Math.max(price - money, 0) : null;
+  const missingMoney = prices[drink] ? positiveOrZero(price - money) : null;
 
   const output =
     missingMoney !== 0
-      ? `${missingMoney} euros missing`
+      ? `M:${missingMoney} euros missing`
       : `${checkDrink}${extraHot ? "h" : ""}:${sugar || ""}:${
           stick ? "0" : ""
         }`;
 
   return output || "No drink received";
+
+  function positiveOrZero(value) {
+    return Math.max(value, 0);
+  }
 }
 
 export default translateOrder;
