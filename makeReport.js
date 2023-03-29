@@ -5,9 +5,11 @@ function makeReport() {
     chocolate: 0,
     tea: 0,
     earnedMoney: 0,
-  }
+  };
 
-  return report; 
+  const {coffee, juice, chocolate, tea, earnedMoney} = report
+
+  return `M: Coffee: ${coffee}, Juice: ${juice}, Chocolate: ${chocolate}, Tea: ${tea}, Earned Money: ${earnedMoney}`;
 }
 
 export default makeReport;

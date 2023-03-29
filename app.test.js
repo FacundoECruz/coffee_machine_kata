@@ -83,11 +83,11 @@ test("Hh:1:0 when extra hot chocolate with one sugar and a stick)", () => {
 
 test("returns a report how many of each drink was sold and the total amount of money earned", () => {
   const result = makeReport();
-  expect(result).toHaveProperty("coffee");
-  expect(result).toHaveProperty("juice");
-  expect(result).toHaveProperty("chocolate");
-  expect(result).toHaveProperty("tea");
-  expect(result).toHaveProperty("earnedMoney");
+  expect(result).toContain("Coffee");
+  expect(result).toContain("Juice");
+  expect(result).toContain("Chocolate");
+  expect(result).toContain("Tea");
+  expect(result).toContain("Earned Money");
 });
 
 test("indicates me the shortage (if any) and that a notification has been sent", () => {
