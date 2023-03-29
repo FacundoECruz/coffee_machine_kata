@@ -4,12 +4,9 @@ import emailNotifier from "./emailNotifier";
 function checkAvailability(drink) {
   const isEmpty = beverageQuantityChecker(drink)
   console.log(isEmpty)
-  if (isEmpty) {
-    emailNotifier(drink);
-    const notifEmptyDrink = `${drink} shortage, notification sent to the company`;
-    return notifEmptyDrink;
-  } else {
-    return "";
+  return {
+    isNotAvailable: isEmpty,
+    availabilityMsg: `${drink} shortage, notification sent to the company`
   }
 }
 

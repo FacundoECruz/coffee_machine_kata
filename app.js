@@ -16,10 +16,10 @@ function translateOrder({
 
   const checkDrink = drinkCodes[drink] || null;  
   //*******CHANGE*********** */
-  const {is_not_available, availability_msg} = checkAvailability(drink)
+  const {isNotAvailable, availabilityMsg} = checkAvailability(drink)
 
-  if(is_not_available) { 
-    return available
+  if(isNotAvailable) { 
+    return availabilityMsg;
   }
 
   const prices = {
@@ -29,7 +29,7 @@ function translateOrder({
     juice: 6,
   };
 
-  const missingMoney = prices[drink] ? positiveOrZero(price - money) : null;
+  const missingMoney = prices[drink] ? positiveOrZero(prices[drink] - money) : null;
 
   const output =
     missingMoney !== 0

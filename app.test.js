@@ -1,10 +1,10 @@
 import translateOrder from "./app";
-import makeReport from "./makeReport"
+import makeReport from "./makeReport";
 import checkAvailability from "./checkAvailability";
 import { beverageQuantityChecker } from "./beverageQuantityChecker";
 import { fakeDrinkDb } from "./fakeDrinkDb";
 
-jest.mock('./beverageQuantityChecker')
+jest.mock("./beverageQuantityChecker");
 
 function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
@@ -83,22 +83,22 @@ test("Hh:1:0 when extra hot chocolate with one sugar and a stick)", () => {
 
 test("returns a report how many of each drink was sold and the total amount of money earned", () => {
   const result = makeReport();
-  expect(result).toHaveProperty('coffee');
-  expect(result).toHaveProperty('juice');
-  expect(result).toHaveProperty('chocolate');
-  expect(result).toHaveProperty('tea');
-  expect(result).toHaveProperty('earnedMoney');
+  expect(result).toHaveProperty("coffee");
+  expect(result).toHaveProperty("juice");
+  expect(result).toHaveProperty("chocolate");
+  expect(result).toHaveProperty("tea");
+  expect(result).toHaveProperty("earnedMoney");
 });
 
 test("indicates me the shortage (if any) and that a notification has been sent", () => {
-  const drink = 'coffee'
-  if(fakeDrinkDb[drink] === 0) {
-    beverageQuantityChecker.mockReturnValueOnce(`${drink} shortage, notification sent to the company`)
-    const notifEmptyDrink = checkAvailability(drink)
-    expect(notifEmptyDrink).toBe(`${drink} shortage, notification sent to the company`)
-  } else {
-    beverageQuantityChecker.mockReturnValueOnce('')
-    const notifEmptyDrink = checkAvailability(drink)
-    expect(notifEmptyDrink).toBe('')    
-  }
-})
+  const drink = "coffee";
+
+  beverageQuantityChecker.mockReturnValueOnce(true);
+  expect(checkAvailability(drink)).toStrictEqual({
+    isNotAvailable: true,
+    availabilityMsg: `${drink} shortage, notification sent to the company`,
+  });
+  // expect(translateOrder(drink)).toBe(
+  //   `${drink} shortage, notification sent to the company`
+  // );
+});
