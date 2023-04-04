@@ -15,7 +15,6 @@ function translateOrder({
   };
 
   const checkDrink = drinkCodes[drink] || null;  
-  //*******CHANGE*********** */
   const {isNotAvailable, availabilityMsg} = checkAvailability(drink)
 
   if(isNotAvailable) { 

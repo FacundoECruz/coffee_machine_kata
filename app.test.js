@@ -2,7 +2,6 @@ import translateOrder from "./app";
 import makeReport from "./makeReport";
 import checkAvailability from "./checkAvailability";
 import { beverageQuantityChecker } from "./beverageQuantityChecker";
-import { fakeDrinkDb } from "./fakeDrinkDb";
 
 jest.mock("./beverageQuantityChecker");
 
@@ -98,7 +97,4 @@ test("indicates me the shortage (if any) and that a notification has been sent",
     isNotAvailable: true,
     availabilityMsg: `${drink} shortage, notification sent to the company`,
   });
-  // expect(translateOrder(drink)).toBe(
-  //   `${drink} shortage, notification sent to the company`
-  // );
 });
