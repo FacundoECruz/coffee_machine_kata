@@ -1,4 +1,4 @@
-import checkAvailability from "./checkAvailability";
+import { isStorageEmpty, notifyMissingDrink } from "./coffeeMachineCapabilities";
 
 function translateOrder({
   drink,
@@ -14,12 +14,7 @@ function translateOrder({
     juice: "O",
   };
 
-  const checkDrink = drinkCodes[drink] || null;  
-  const {isNotAvailable, availabilityMsg} = checkAvailability(drink)
-
-  if(isNotAvailable) { 
-    return availabilityMsg;
-  }
+  const checkDrink = drinkCodes[drink] || null;
 
   const prices = {
     tea: 4,
@@ -28,11 +23,23 @@ function translateOrder({
     juice: 6,
   };
 
-  const missingMoney = prices[drink] ? positiveOrZero(prices[drink] - money) : null;
+  const missingMoney = prices[drink]
+    ? positiveOrZero(prices[drink] - money)
+    : null;
+
+  const missingMoneyMsg = `${missingMoney} euros missing`;
+  const shortageMsg = `${drink} shortage, notified to the company`;
+
+  let shortage = isStorageEmpty(drink)
+  if(shortage) {
+    notifyMissingDrink(drink)
+  }
 
   const output =
     missingMoney !== 0
-      ? `M:${missingMoney} euros missing`
+      ? `M:${missingMoneyMsg}`
+      : shortage
+      ? `M:${shortageMsg}`
       : `${checkDrink}${extraHot ? "h" : ""}:${sugar || ""}:${
           stick ? "0" : ""
         }`;
