@@ -1,4 +1,22 @@
-import { isStorageEmpty, notifyMissingDrink } from "./coffeeMachineCapabilities";
+import {
+  isStorageEmpty,
+  notifyMissingDrink,
+} from "./coffeeMachineCapabilities";
+import {absolute, isNegative} from "./utils/mathUtils";
+
+const drinkCodes = {
+  tea: "T",
+  chocolate: "H",
+  coffee: "C",
+  juice: "O",
+};
+
+const prices = {
+  tea: 4,
+  chocolate: 5,
+  coffee: 6,
+  juice: 6,
+};
 
 function translateOrder({
   drink,
@@ -7,48 +25,27 @@ function translateOrder({
   stick = false,
   extraHot = false,
 }) {
-  const drinkCodes = {
-    tea: "T",
-    chocolate: "H",
-    coffee: "C",
-    juice: "O",
-  };
+  const drinkCode = drinkCodes[drink];
 
-  const checkDrink = drinkCodes[drink] || null;
+  const drinkPrice = prices[drink];
+  const differenceMoney = money - drinkPrice 
 
-  const prices = {
-    tea: 4,
-    chocolate: 5,
-    coffee: 6,
-    juice: 6,
-  };
+  if(isNegative(differenceMoney)){
+    const missingMoneyMsg = `M:${absolute(differenceMoney)} euros missing`;
+    return missingMoneyMsg;
+  } 
 
-  const missingMoney = prices[drink]
-    ? positiveOrZero(prices[drink] - money)
-    : null;
-
-  const missingMoneyMsg = `${missingMoney} euros missing`;
-  const shortageMsg = `${drink} shortage, notified to the company`;
-
-  let shortage = isStorageEmpty(drink)
-  if(shortage) {
-    notifyMissingDrink(drink)
+  if(isStorageEmpty(drink)){
+    notifyMissingDrink(drink);
+    return `M:${drink} shortage, notified to the company`
   }
 
-  const output =
-    missingMoney !== 0
-      ? `M:${missingMoneyMsg}`
-      : shortage
-      ? `M:${shortageMsg}`
-      : `${checkDrink}${extraHot ? "h" : ""}:${sugar || ""}:${
-          stick ? "0" : ""
-        }`;
+  const extraHotCode = extraHot ? "h" : "";
+  const sugarCode = sugar || "";
+  const stickCode = stick ? "0" : "";
+  const output = `${drinkCode}${extraHotCode}:${sugarCode}:${stickCode}`;
 
-  return output || "No drink received";
-
-  function positiveOrZero(value) {
-    return Math.max(value, 0);
-  }
+  return output;
 }
 
 export default translateOrder;
