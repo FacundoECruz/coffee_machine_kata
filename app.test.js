@@ -102,9 +102,12 @@ test("when is a shortage returns message and sends email notification", () => {
   expect(coffeeMachineFunctions.notifyMissingDrink).toHaveBeenCalledTimes(1)
 });
 
-test("returns absolute number", () => {
+test("returns the absolute number", () => {
   expect(absolute(-1)).toBe(1)
   expect(absolute(1)).toBe(1)
 })
 
-
+test("returns true when the value is negative", () => {
+  expect(isNegative(-1)).toBe(true)
+  expect(isNegative(1)).toBe(false)
+})
