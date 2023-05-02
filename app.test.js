@@ -1,7 +1,7 @@
 import translateOrder from "./app";
-import * as coffeeMachineFunctions from "./coffeeMachineCapabilities";
-import makeReport from "./makeReport";
-
+import * as coffeeMachineFunctions from "./utils/coffeeMachineCapabilities";
+import makeReport from "./utils/makeReport";
+import { absolute, isNegative } from "./utils/mathUtils";
 
 function generateOrder(drink, money, sugar, stick, extraHot) {
   const order = {
@@ -101,3 +101,10 @@ test("when is a shortage returns message and sends email notification", () => {
   expect(translateOrder(input)).toBe(output)
   expect(coffeeMachineFunctions.notifyMissingDrink).toHaveBeenCalledTimes(1)
 });
+
+test("returns absolute number", () => {
+  expect(absolute(-1)).toBe(1)
+  expect(absolute(1)).toBe(1)
+})
+
+

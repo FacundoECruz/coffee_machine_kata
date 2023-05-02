@@ -8,4 +8,3 @@ function isNegative(value) {
 
 export {absolute, isNegative};
 
-// TODO: TEST THIS!!!
