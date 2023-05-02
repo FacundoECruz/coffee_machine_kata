@@ -1,7 +1,7 @@
 import {
   isStorageEmpty,
   notifyMissingDrink,
-} from "./coffeeMachineCapabilities";
+} from "./utils/coffeeMachineCapabilities";
 import {absolute, isNegative} from "./utils/mathUtils";
 
 const drinkCodes = {
