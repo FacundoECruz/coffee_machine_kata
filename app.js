@@ -1,8 +1,8 @@
 import {
   isStorageEmpty,
   notifyMissingDrink,
-} from "./utils/coffeeMachineCapabilities";
-import {absolute, isNegative} from "./utils/mathUtils";
+} from "./utils/coffeeMachineCapabilities.js";
+import {absolute, isNegative} from "./utils/mathUtils.js";
 
 const drinkCodes = {
   tea: "T",
